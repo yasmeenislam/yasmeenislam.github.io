@@ -1,0 +1,1427 @@
+
+
+<?php
+
+function sendJsonResponse($status, $message) {
+	echo "{\"status\":" . ($status ? "true" : "false") . ", \"message\":\"" . str_replace("\"", "\\\"", $message) . "\"}";
+	exit();
+}
+
+function sendOk($message) {
+	sendJsonResponse(true, $message);
+}
+
+function sendError($message) {
+	sendJsonResponse(false, $message);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+$identList = array(
+
+		
+
+		
+
+		
+
+		
+
+		
+
+);
+
+$to_email = "";
+$ident = $_POST["ident"];
+if (array_key_exists($ident, $identList)) {
+	$to_email = $identList[$ident];
+} else {
+
+	sendError("Es ist ein interner Fehler aufgetreten.");   
+
+
+}
+
+if (empty($_POST["name"])) {
+
+    sendError("Bitte geben Sie einen Namen ein.");
+
+
+
+} else {
+  	$name = $_POST["name"];
+	if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+  	
+	  	sendError("Bitte geben Sie einen gültigen Namen ein.");
+	
+	
+	}
+}
+
+if (empty($_POST["email"])) {
+
+    sendError("Bitte geben Sie eine E-Mail ein.");
+
+
+  } else {
+    $email = $_POST["email"];
+    // check if e-mail address is well-formed
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  	
+	    sendError("Bitte geben Sie einen gültige E-Mail ein.");
+	
+
+   }
+}
+
+if (empty($_POST["message"])) {
+
+    sendError("Bitte geben Sie eine Nachricht ein.");
+
+  } else {
+  	$message = $_POST["message"];
+	if (!preg_match("/^[^<[]*$/",$message)) {
+  	
+		sendError("Bitte geben Sie eine gültige Nachricht ohne die Zeichen < und [ ein. Vielen Dank");
+	
+
+	}
+}
+
+	$from = $_POST["email"];
+	$absender = "yasmeenmalik49@gmail.com";
+	
+	$subject = "Kontaktanfrage";
+	$content = $_POST["message"] . "\r\rAbsender der Kontaktanfrage:  " . $from;
+	
+	$headers   = array();
+	$headers[] = "MIME-Version: 1.0";
+	$headers[] = "Content-type: text/plain; charset=utf-8";
+	$headers[] = "From: ".$absender;
+	$headers[] = "X-Mailer: PHP/".phpversion();
+	
+	@mail($to_email, $subject, $content, implode("\n", $headers));
+
+	@mail($from, $subject, $content, implode("\n", $headers));
+
+	sendOk("");	
+
+
+	exit();
+}
+
+
+?>
+
+
+
+
+<!DOCTYPE html>
+<html>
+  
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!--[if IE 9]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+    <!-- <title></title> -->
+    <title>Halal Certification Services (EU) GmbH</title>
+	<meta name="keywords" content="Halal Certification Services (EU) GmbH" />	
+	
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../Layout/css/responsiveslides.css" type="text/css">
+	<link rel="stylesheet" href="../Layout/css/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="../Layout/css/themes.css")$" type="text/css">
+	<link rel="stylesheet" href="../Layout/css/style.css" type="text/css">
+	<!--[if lt IE 9]>
+	<script src=../Layout/js/html5shiv.min.js"></script>
+	<![endif]-->
+	<link rel="icon" href="../Layout/images/favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="../Layout/images/favicon.ico" type="image/x-icon"/>
+
+	<script type="text/javascript" src="../Layout/js/jquery-1.7.2.min.js"></script>
+	
+	
+	
+	
+     
+	
+	<script type="text/javascript">
+	    WebFontConfig = {fontdeck: {id: '39555'}};
+	    (function () {
+	        var wf = document.createElement('script');
+	        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+	                '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+	        wf.type = 'text/javascript';
+	        wf.async = 'true';
+	        var s = document.getElementsByTagName('script')[0];
+	        s.parentNode.insertBefore(wf, s);
+	    })();
+	</script>
+	
+		
+	
+    
+    
+	<style>
+ 
+    a {
+    	color: #FFFFFF;
+	}
+	a:hover  {
+    	color:#FFFFFF !important;
+    }
+ 
+ 	@media (min-width: 1100px) and (max-width: 1380px) {
+ 		.container {
+ 			margin-left: 22%;
+ 		}
+ 	}
+    #primary a {
+    	color: #FFFFFF;
+	}
+	#primary li a:hover  {
+    	color:#FFFFFF !important;
+    }
+	#primary li.active a {
+    	color: #FFFFFF !important;
+	}
+
+    </style>
+    <style>
+    	/* style.css */
+    	body {
+		  	background-color: #11642e;
+		}  
+		#primary li.active a:before {
+			color: #11642e;
+		}
+  		.contact_form .sub-btn:hover {
+  			background-color: #11642e ;
+		}	
+		/* imm.css */
+		.zitat_green .transparency {
+			background-color: #11642e;
+		}
+		.green_box .transparency {
+			background-color: #11642e;
+		}
+		.h2green {
+  			color: #FFFFFF;
+		}
+		.h2white {
+		    color: #FFFFFF;
+		}		
+		.headline_green, .text_green {
+		  color: #FFFFFF;
+		}
+		div#sildeshow p {
+		    color: #FFFFFF;
+		}
+		.liste_green {
+		  color: #FFFFFF;	
+		}
+		@media (max-width: 1119px){
+			#primary {
+	    		background: #11642e ;
+			}   
+		  	#nav{
+				background:#11642e !important;
+			}
+		}
+		.navbar-inverse .btn-navbar {
+			background: #238a2e ;
+		}
+		.navbar-inverse .btn-navbar:hover, .navbar-inverse .btn-navbar:focus, .navbar-inverse .btn-navbar:active, .navbar-inverse .btn-navbar.active, .navbar-inverse .btn-navbar.disabled, .navbar-inverse .btn-navbar[disabled] {
+		    background: #238a2e ;
+		}
+
+
+</style>
+
+
+
+    
+    
+  </head>
+  <body> 
+   
+	
+
+    <div class="wrapper ">
+    
+    
+
+    
+	    
+	    <div id="primary" class="navbar navbar-inverse">
+	    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
+	    <div class="nav-collapse collapse">
+	        <ul id="nav" style="background:url('../Layout/images/nav_bg.png') repeat-y left top #11642e;">
+	            <li style="display:none" class="active"><a href="#home"><span><i class="fa fa-home" aria-hidden="true"></i></span>Home</a></li>
+	       
+	      	</ul> 	 
+	      	
+	    </div>
+		</div>
+   
+
+   
+
+
+
+
+    
+	
+
+
+
+
+	
+
+	
+
+		
+		<style>
+				.header {
+				    background-image: url(../Layout/images/Marketingpaket/Test-Bilder/bg-1.jpg) ;
+				}
+		</style>
+		
+		<div class="header" id="home"  >
+				    <ul class="flags">
+  	<li><a href="index.html"><img src="../Layout/images/1200px-Flag_of_Germany.svg.png" height="30" width="40"></a></li>
+  	<li><a href="index.html"><img src="../Layout/images/1280px-Flag_of_the_United_Kingdom.svg.png" height="30" width="40"></a></li>
+  </ul>
+				    
+				</div>
+				<a class="messe next-section-home" href="javascript:scrollToModule()">
+				    <img style="display:none;width:100%;margin-top:57px;" class="parallax_mobile" src="../Layout/images/Marketingpaket/Test-Bilder/bg-1.jpg">
+				</a>
+
+
+
+
+
+
+	
+
+	
+
+		
+		<div class="clearfix"></div>
+		<img src="../Layout/images/Marketingpaket/Parralax-Bild_Teasertext-Modul.jpg" class="parallax_mobile" style="display:none; width:100%;" alt="">
+		
+		<div id="spaltentext_2" data-navigationTitle="Home" class="module parallax text_columns" data-parallaxValue="0.2" style="background-image: url('../Layout/images/Marketingpaket/Parralax-Bild_Teasertext-Modul.jpg');">
+		  <div class="green_box" style="min-height:400px">
+		    <div class="transparency" style=" background-image: url('../Layout/images/Marketingpaket/Hintergrundbild_Teasertext-Modul_1.jpg');"></div>
+		    <div class="container">
+		      <div class="row-fluid fadeIn animated">
+		
+		
+			
+				
+			
+		
+				
+				    <div class="span12" 	<div >
+						
+
+
+
+
+<h2 style="text-align:center;color:#4c4c4c;" class="h2white"><br /><br />Home</h2>
+<p style="text-align:center;color:#000000;line-height:25px !important;">Halal-Zertifizierungsdienste (HCS) ist eine nicht-staatliche, registrierte Zertifizierungsstelle.
+<br><br>
+Unser Ziel ist es sicherzustellen, dass Muslime verifizierte Halal konsumieren können. Diese Produkte müssen die Vorgaben der islamischen Speisegesetze erfüllen welche im Koran und Sunna niedergelegt sind. <br><br>
+Wir garantieren durch unser professionelles und gut ausgebildetes Team eine authentische und glaubwürdige Zertifizierung. 
+<br><br>
+Unsere technischen und religiösen Experten sind bemüht die höchsten Standards durch strenge Kontrollen durchzusetzen. Damit garantiert unsere Zertifizierung, dass die von uns zertifizierte Produkte auch wirklich Halal konform sind. 
+<br><br>
+HCS wurde vor rund 25 Jahren mit dem Grundgedanken ins Leben gerufen, um den Muslimen weltweit authentisch zertifizierte Halal-Produkte zur Verfügung zu stellen. 
+
+</p>
+
+					</div>
+				
+				
+				
+		
+		      </div>
+		    </div>
+		    <div class="clearfix"></div>
+		     <a href="#" class="next-section messe"><div class="next-section-image" style="
+		    width: 92px;background-color: rgba(68,161,43,0.5); "><i style="font-style: normal;"></i></div></a>
+
+		 </div>
+		</div>
+	
+
+
+
+<!-- About Us start  -->
+		<div class="clearfix"></div>
+		<img src="../Layout/images/Marketingpaket/Key-Features_anuga_D.jpg" class="parallax_mobile" style="display:none; width:100%;" alt="">
+		    <div id="key2visual" data-navigationTitle="ÜBER UNS" class="module keyVisualModule parallax" data-parallaxValue="0.2" style="background-image: url('../Layout/images/Marketingpaket/Key-Features_anuga_D.jpg');" >
+		    <div class="green_box">
+		        <div class="transparency" style=""></div>
+		        <div class="container">
+		            <h2 class="wow fadeIn h2white" data-wow-delay="0.2s" > <br /><br />ÜBER UNS</h2>
+		            <div class="wow fadeIn" data-wow-delay="0.2s" >
+
+		             	Willkommen bei Halal Certification Services (HCS) und vielen Dank für Ihr Interesse an uns und unserer Organisation.<br><br>Die Idee, Dienstleistungen rund um das Thema Halal anzubieten, entstand 1987 aus Anfragen der muslimischen Gemeinschaft. Es ging darum, Unsicherheiten über die Zulässigkeit einzelner Produkte (im Zentrum standen vor allem Käse und Schokolade) zu klären. Dieser Service wurde später auch zwischenzeitlich vom Islamischen Zentrum in Bern angeboten.<br><br>
+		             	In den letzten Jahren haben sich die Halal Certification Services (HCS) als spezialisiertes Zertifizierungsunternehmen im Markt etabliert. Wir bekommen weltweit Anerkennung und Zustimmung für unsere Evaluation der Halal-Konformität von Konsumgütern.<br><br>
+		             	HCS ist heute eine renommierte und global anerkannte Prüfungs-, Inspektions- und Zertifizierungsstelle. Es ist unser erklärtes Ziel, die Halal-Wahrnehmung kontinuierlich zu verbessern und das Angebot Halal-zertifizierter Produkte „Made in Switzerland“ zu erweitern.<br><br>
+<!-- Tab inner start -->
+<div class="tab-about">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#menu1">Unsere Geschichte</a></li>
+    <!-- <li><a data-toggle="tab" href="#menu1">Our History</a></li> -->
+    <li><a data-toggle="tab" href="#menu2">Unsere Mission</a></li>
+    <li><a data-toggle="tab" href="#menu3">Ziele</a></li>
+    <!-- <li><a data-toggle="tab" href="#menu4">Recognitions</a></li> -->
+    <!-- <li><a data-toggle="tab" href="#menu5">Contact Details</a></li> -->
+
+  </ul>
+
+  <div class="tab-content">
+    <div id="menu1" class="tab-pane fade in active">
+      <h3>Unsere Geschichte</h3>
+      <p>Er nahm die Herausforderung an und konnte dies mit Hilfe eines lokalen Landwirts realisieren, der auch einen eigenen Schlachtbetrieb auf seinem Hof besass. Das Vorgehen war einfach. Das Tier wurde von Dr. Tufail geschlachtet und der Landwirt richtete das Fleisch entsprechend her. Nach der Prüfung durch den Tierarzt wurde es an die Verbraucher geliefert.</p>
+      <p>Mit dem Verbot der Hand-Schlachtung und dem Aufkommen der türkischen Geschäfte sank das Interesse der Verbraucher und die Schlachtungen wurden eingestellt.</p>
+      <p>Im Jahre 1987 traten die Muslime wieder mit einer neuen Anfrage an Dr. Tufail heran. Diesmal wollten sie wissen, ob der Käse, der in den Supermärkten zu kaufen war, auch wirklich Halal sei. Auch diese Herausforderung nahm er gerne an und schrieb allen Milchprodukte-Erzeugern mit der Bitte, ihm mehr Details über die tierischen Rohstoffe zu geben, damit er die Halal-Konformität der Inhaltsstoffe überprüfen könne. Das war die Geburtsstunde der Halal-Inspektion.</p>
+      <p>1994 wurde die Zertifizierung der Produkte aufgenommen, nachdem ein Aroma-Hersteller sich an Dr. Tufail wandte und nach einer Bestätigung der Halal-Konformität fragte. In den folgenden Jahren arbeitete er im Dienst der Gemeinschaft und versuchte die Produzenten davon zu überzeugen, dass nur durch strukturelle Veränderungen und räumliche Trennung der Produktionslinien authentische Halal-Produkte und -Prozesse gewährleistet werden können.</p>
+      <p>Im Lauf der folgenden Jahre übernahm Halal Certification Services (HCS) die  Inspektion, Überwachung und Überprüfung der Schweizer Unternehmen, die sich dafür interessierten, authentische Halal-Produkte zu produzieren.</p>
+      
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Unsere Mission</h3>
+      <p>Das Ziel von HCS sind Halal-Produkte, die dem höchst möglichen Standard gemäss der Lehre im heiligen Koran und der Sunna des Propheten Mohammed (Allah segne ihn und schenke ihm Frieden) entsprechen.</p>
+      <p>Aufgrund der zunehmenden Forderungen nach einem unabhängigen, zuverlässigen und international anerkannten Zertifizierungssystem hat sich HCS entschlossen, ein Halal-Prüfungssystem zu entwickeln und zu implementieren, das die integrierende Halal-Konformität für die ganze Prozesskette vom Einkauf über die Produktion bis zum Verkauf sicherstellt.</p>
+      <p>HCS schult und unterstützt interessierte Unternehmen, um sie zu befähigen, glaubwürdige Halal-Produkte zu produzieren. Zusätzlich kontrolliert HCS die Prozesse und Produkte und führt auch Prüfungen durch.</p>
+      <p>Werden Anforderungen nicht erfüllt, wird in letzter Konsequenz die Zertifizierung aberkannt. Es ist wichtig zu wissen, dass HCS in erster Priorität den Betroffenen helfen will, die Halal-Anforderungen zu verstehen und eine Professionalität zu erreichen, mit der sie glaubwürdige Halal-Produkte nachhaltig produzieren können.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Ziele</h3>
+      <ol>
+      	<li>Nur Produkte, welche die Halal-Anforderungen jederzeit erfüllen, werden mit einem Halal-Gütesiegel ausgezeichnet. Die Halal-Konformität muss nachvollziehbar sichergestellt sein. Dies wird mit regelmässigen und standardisierten Inspektionen der Produktionsanlagen und Prozesse erreicht;</li>
+      	<li>Es werden Halal-Standards angewendet, die von muslimischen Gelehrten akzeptiert und in Kraft gesetzt wurden;</li>
+      	<li> Die Industrie wird über die Halal-Anforderungen und deren Einfluss auf die Fertigungsverfahren und Prozesse aufklärt;</li>
+      	<li>Die Vielfalt und das Angebot der Halalzertifizierten Produkte wird erhöht.</li>
+
+      </ol>
+    </div>
+    <div id="menu4" class="tab-pane fade">
+      <h3>Recognitions</h3>
+     
+      <div class="rslides_container" style="display: block;">
+      <ul class="rslides centered-btns centered-btns1" style="max-width: 1200px;"	>
+     <img src="../Layout/images/Marketingpaket/SliderModule/s-0.jpg" alt="Indonesian-Certificate" id="centered-btns1_s00" class="centered-btns1_on" style="display: block; float: left; position: relative; opacity: 1; z-index: 2; transition: opacity 500ms ease-in-out;">	
+	<img src="../Layout/images/Marketingpaket/SliderModule/s-01.jpg" alt="Indonesian-Letter for flavour recognition" id="centered-btns1_s11" style="display: block; float: none; position: absolute; opacity: 0; z-index: 1; transition: opacity 500ms ease-in-out;" class="">	
+	<img src="../Layout/images/Marketingpaket/SliderModule/s-02.jpg" alt="Singapore-Certificate" id="centered-btns1_s22" style="display: block; float: none; position: absolute; opacity: 0; z-index: 1; transition: opacity 500ms ease-in-out;" class="">	
+	<img src="../Layout/images/Marketingpaket/SliderModule/s-03.jpg" alt="[slidermodul_besuchererfassung_d:MEDIASTORE_LEAF]@5beb622a" id="centered-btns1_s33" style="display: block; float: none; position: absolute; opacity: 0; z-index: 1; transition: opacity 500ms ease-in-out;" class="">	
+	</ul>
+	<a href="#" class="centered-btns_nav centered-btns1_nav prev">Previous</a>
+	<a href="#" class="centered-btns_nav centered-btns1_nav next">Next</a>
+	<ul class="centered-btns_tabs centered-btns1_tabs">
+		<li class="centered-btns1_s11 centered-btns_here">
+			<a href="#" class="centered-btns1_s11">1</a>
+		</li>
+		<li class="centered-btns1_s22">
+			<a href="#" class="centered-btns1_s22">2</a>
+		</li>
+		<li class="centered-btns1_s33">
+			<a href="#" class="centered-btns1_s33">3</a>
+		</li>
+		<li class="centered-btns1_s44">
+			<a href="#" class="centered-btns1_s44">4</a>
+		</li>
+
+	</ul>
+	</div>
+    </div>
+    <div id="menu5" class="tab-pane fade">
+      <h3>Contact Details</h3>
+      <p><b>Company Name: Halal Certification Service</b></p>
+      <p><b>Our Offices</b></p>
+      <table class="contact_address">
+      	<tr>
+      		<th>Switzerland</th>
+      		<th>Spain/Portugal</th>
+      		<th>Greece</th>
+      	</tr>
+      	<tr>
+      		<td>
+      			<ul>
+      				<li><i class="icon-home"></i> Salinenstrasse 18,<br>4310 Rheinfelden</li>
+      				<li><i class="icon-phone"></i>Tel: + 41 61 813 30 64</li>
+      				<li><i class="icon-list-alt"></i>Fax: + 41 61 813 30 65</li>
+      				<li><i class="icon-envelope"></i>Email: info@halalcs.org</li>
+      			</ul>
+      		</td>
+      		<td>
+      			<ul>
+      				<li><i class="icon-home"></i> Shaikh Ali Achcar<br> Madrid</li>
+      				<li><i class="icon-phone"></i>Tel: + 34 692 59 50 40</li>
+      				<li><i class="icon-envelope"></i>Email: spain@halalcs.org</li>
+      			</ul>
+      		</td>
+      		<td>
+      			<ul>
+      				<li><i class="icon-home"></i>Mr. Thomas Vassaras <br>Thessaloniki</li>
+      				<li><i class="icon-phone"></i>Tel: + 30 2310 474115</li>
+      				<li><i class="icon-list-alt"></i>Fax: + 30 2310 472984</li>
+      				<li><i class="icon-envelope"></i>Email: greece@halalcs.org</li>
+      			</ul>
+      		</td>
+      	</tr>
+      </table>
+    </div>
+  </div>
+  </div>
+
+<!-- Tab inner end-->
+		            </div>
+		        </div>
+		        <div class="clearfix"></div>
+		    <a href="#" class="next-section messe"><div class="next-section-image" style="
+		    width: 92px;background-color: rgba(68,161,43,0.5); "><i style="font-style: normal;"></i></div></a>
+
+		    </div>
+		</div>
+		<style>
+		   #key2visual .container div {
+		        color: #FFFFFF; /* TODO Integration: einstellbar  */
+		        text-align: center; /* TODO Integration: possible values: left, center, right  */
+		        
+				line-height: 25px;
+		    }
+		   #key2visual h2 {
+		        color: #FFFFFF; /* TODO Integration: einstellbar  */
+		        text-align: center; /* TODO Integration: possible values: left, center, right  */
+		        
+		    }
+		</style>
+
+      
+
+
+
+
+	
+
+	
+
+
+<!-- About Us end  -->
+
+	
+
+	
+<!-- Services start -->
+		
+		<div class="clearfix"></div>
+		<img src="../Layout/images/Marketingpaket/Key-Features_anuga_D.jpg" class="parallax_mobile" style="display:none; width:100%;" alt="">
+		    <div id="keyvisual" data-navigationTitle="Dienstleistungen" class="module keyVisualModule parallax" data-parallaxValue="0.2" style="background-image: url('../Layout/images/Marketingpaket/Key-Features_anuga_D.jpg');" >
+		    <div class="green_box">
+		        <div class="transparency" style=""></div>
+		        <div class="container">
+		            <h2 class="wow fadeIn h2white" data-wow-delay="0.2s" > <br /><br />Dienstleistungen</h2>
+		            <div class="wow fadeIn" data-wow-delay="0.2s" >
+
+		             	Ergänzend zu unseren Dienstleistungen für die Halal-Zertifizierung, die wir laufend optimieren und ausbauen, bieten wir auch Halal-Schulungen an. Damit wollen wir das Verständnis für das Halal-Prinzip fördern und die Anforderungen an die Halal-Lebensweise bewusst machen. <br><br>Die Lebensmittel-Technologen und andere relevante Spezialisten der Lebensmittel-, pharmazeutischen und kosmetischen Industrie müssen die kritischen Prozesse und Rohstoffe kennen, die den Halal-Status eines Produktes gefährden können. Die permanente Schulung und Weiterbildung bildet die Grundlage für die erfolgreiche Implementierung eines Halal-Systems.<br><br>Die Halal-Zertifizierung ist für die Produzenten und Anbieter ein wichtiges Marketing-Instrument für den Ausbau bestehender und die Erschliessung neuer Marktsegmente. Für die Konsumenten bringt die Halal-Zertifizierung die notwendige Sicherheit, dass die Produkte den Halal-Prinzipien und –Anforderungen entsprechen.<br><br>Die zwei wichtigsten Forderungen der Halal-Konformität und der darauf aufbauenden Halal-Zertifizierung sind die Vermeidung der Kreuzkontaminierung und das Sicherstellen der Rückverfolgbarkeit über die gesamte Produktionskette.<br><br>
+		            </div>
+		            <div class="services-tab">
+		            	  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#Certification">ZERTIFIZIERUNG</a></li>
+    <li><a data-toggle="tab" href="#Benefits">VORTEILE</a></li>
+    <li><a data-toggle="tab" href="#certificateprocd">Certification procedure</a></li> 
+    <li><a data-toggle="tab" href="#training">Schulungen</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="Certification" class="tab-pane fade in active">
+      <h3>Zertifizierung</h3>
+      <p>Halal-Zertifizierung ist ein religiös motivierte, Qualitätszertifizierung von irgendeinem Produkt, das besagt, dass es:</p>
+      <ul>
+      	<li>Zum Verzehr geeignet ist.</li>
+      	<li>hohe Qualitäts- und hygienischen Anforderungen gerecht wird.</li>
+      	<li>Ethische und ökologische Aspekte bei der Herstellung beachtet wurden</li>
+      	<li> Den hohen Anforderungen, wie Sie im Qur’an und Sunnah festgelegt werden, erfüllt.</li>
+      </ul>
+      <p>Lassen Sie uns erklären, warum wir nicht nur vom menschlichen Verzehr reden?</p>
+      <p>Halal ist ein Lebenskonzept. Wenn wir die Umsetzung in den verschiedenen Lebensaspekten verstehen wollen, müssen wir erkennen, dass es über unser gemeinsames Verständnis von Halal hinausgeht.</p>
+      <h3>Zum Beispiel: Fleisch. </h3>
+      <p>Die Mehrheit weiss, dass Fleisch von einem erlaubten Tier, nur dann erlaubt ist, wenn es gemäss der islamischen Vorschriften geschlachtet worden ist.</p>
+      <p>Geht man etwas vertiefter in die Materie, dann wird es sehr schnell klar, dass neben der Respektierung der Schlachtungsgebote auch die Fütterung (die Tiere sollten nicht mit gefährlichen oder unerlaubten Mittel gefüttert werden), Tierhaltung, Tiertransport und andere Aspekte des Tierschutzes genau so wichtig sind und während des Zertifizierungsprozesses berücksichtigt werden müssen..</p>
+      <p>Halal-Zertifizierung ist eine freiwillige Zertifizierung und bescheinigt dem zertifiziertem Produkt, das es im Einklang der Islamischen Gesetze gehandhabt wurde.</p>
+      <p>Einige muslimische Länder machen es zur Vorbedingung, dass importierte Ware im Herstellungsland von einem lokalen, vertrauenswürdigem islamischen Organ zertifiziert werden müssen.</p>
+      <p>In Länder, wo es keine Vorbedingung ist, ist die Zertifizierung ein nützliches und geschätztes Marketingisntrument für die Unternehmen und zusätzlich eine vertrauensbildende Massnahme für die Konsumenten, welche mit wachsender Besorgnis nach steigendener Lebensmittelqualität und -sicherheit Ausschau halten.</p>
+    </div>
+    
+    <div id="Benefits" class="tab-pane fade">
+      <h3>Vorteile für die Verbraucher:</h3>
+      <p>Ein Produkt, das von einer islamischen Zertifizierungsinstanz geprüft und für Halal befunden wurde, ist mit einem Gütesiegel als Halal-zertifiziertes Produkt ausgezeichnet. Damit hat der Konsument/die Konsumentin die Gewissheit, dass eine gründliche Analyse aller verwendeten Rohstoffe und Zutaten gemacht und das Produkt gemäss den strengen Halal-Normen hergestellt wurde.</p>
+      <h3>Vorteile für die Hersteller:</h3>
+      <ol style="padding: 0 15px;">
+      	<li> Die unabhängige Halal-Zertifizierung ist für die pflichtbewussten muslimischen Konsumenten/Konsumentinnen eine wertvolle und wichtige Qualitätsinformation.</li>
+      	<li> Neben der Überprüfung der Zutaten, der Zubereitung, der Lagerung und der Verarbeitung, werden auch das Produkt und die hygienischen und sanitären Massnahmen durch den Experten sorgfältig inspiziert. Der gesamte Herstellungsprozess ist damit Gegenstand einer gründlichen Inspektion und Überprüfung. Die Vertraulichkeit bleibt selbstverständlich gewahrt.
+      	</li>
+      </ol>      
+      <p>Sobald ein Produkt gemäss unseren Richtlinien das Halal-Zertifikat erlangt hat, bekommt der Hersteller die Erlaubnis, das HCS Halal-Gütesiegel auf der Verpackung oder dem Etikett anzubringen. Diese wertvolle Auszeichnung zeigt, dass das Produkt ein authentisches HCS Halal-zertifiziertes Produkt gemäss der höchsten Qualität und global anerkannten Halal-Zertifizierung ist.</p>
+      <div class="benifits">
+      <h3>Fazit</h3>      
+      <ol style="padding: 0 15px;">
+      	<li>Die Halal-Zertifizierung ermöglicht den Marktzugang zu einem Viertel der Weltbevölkerung. Das ist eine gewinnbringende Exportgelegenheit für jeden Hersteller. Der Halal-Markt wird derzeit auf einen Wert von USD 300 Milliarden geschätzt.</li>
+      	<li>Mit der Halal-Zertifizierung, die auf einer freiwilligen Basis erfolgt, wird gegenüber Unternehmen ohne Halal-Konformität ein signifikanter Wettbewerbsvorteil errungen.</li>
+      	<li> Die Halal-Zertifizierung setzt im Sinne einer Ergänzung des bestehenden HACCP-Programms strenge persönliche Hygieneanforderungen zusätzlich zu der bestehenden Hygienepraxis im Unternehmen voraus.</li>
+      </ol>
+      </div>
+
+    </div>
+    <div id="certificateprocd" class="tab-pane fade">
+      <h3>Certification Procedure</h3>
+      <img src="../Layout/images/Marketingpaket/certification-process-thumb.jpg">
+    </div>
+    <div id="training" class="tab-pane fade">
+      <h3>Schulungen</h3>
+      <p>Wir nahmen diese Herausforderung gerne an und haben eine zweistündige Lektion gestaltet, um den Studenten die kritischen Punkte der Halal-Nahrungsmittelproduktion näher zu bringen.</p>
+      <p>Die sehr gute Akzeptanz durch die Lehrkräfte und Studenten hat uns motiviert, diese Lektion kontinuierlich zu verbessern und auszubauen. Sie wird dieses Jahr bereits zum dritten Mal stattfinden.</p>
+      <p>Unser Ausbildungsmodul zeigt den Studierenden die grundlegenden Anforderungen an die Halal-Lebensmittelproduktion und befähigt sie, die Umsetzung der Norm in der Lebensmittelindustrie zu verstehen.</p>
+      <p>Ausgehend von den Begriffsdefinitionen „Erlaubt (Halal)“ und „Verboten (Haram)“ verweisen wir auf die Quellen der Gebote in Qur'an und Sunnah und erklären die Voraussetzungen, die ein Rohstoff zu erfüllen hat. Ein weiterer Schwerpunkt sind die Anforderungen an die Beschaffung und Lagerung der Rohstoffe und Halbfabrikate, an die Herstellung, Kennzeichnung und an den Transport der Produkte.</p>
+      <p>Studenten sind ein wertvolles Humankapital für die Zukunft der Halal-Industrie. Sie kann von ihrem Wissen über die Anforderungen an die Halal-Produktion profitieren und mit ihrer Hilfe die Halal-Richtlinien effektiv umsetzen.</p>
+      <p>Unser Schulungsprogramm ist eine starke Säule unser Halal-Dienstleistungen. Es wird zurzeit an drei Fachhochschulen in der Schweiz und fünf Fachhochschulen in Deutschland mit Lebensmitteltechnologie als Studienfach eingesetzt.</p>
+    </div>
+
+  </div>
+		            </div>
+		        </div>
+		        <div class="clearfix"></div>
+		    <a href="#" class="next-section messe"><div class="next-section-image" style="
+		    width: 92px;background-color: rgba(68,161,43,0.5); "><i style="font-style: normal;"></i></div></a>
+
+		    </div>
+		</div>
+		<style>
+		   #keyvisual .container div {
+		        color: #FFFFFF; /* TODO Integration: einstellbar  */
+		        text-align: center; /* TODO Integration: possible values: left, center, right  */
+		        
+				line-height: 25px;
+		    }
+		   #keyvisual h2 {
+		        color: #FFFFFF; /* TODO Integration: einstellbar  */
+		        text-align: center; /* TODO Integration: possible values: left, center, right  */
+		        
+		    }
+		</style>
+
+      <!--Services End  -->
+      <!-- Halal Production start -->
+		
+		<div class="clearfix"></div>
+		<img src="../Layout/images/Marketingpaket/Key-Features_anuga_D.jpg" class="parallax_mobile" style="display:none; width:100%;" alt="">
+		    <div id="key3visual" data-navigationTitle="Halal Produktion" class="module keyVisualModule parallax" data-parallaxValue="0.2" style="background-image: url('../Layout/images/Marketingpaket/Key-Features_anuga_D.jpg');" >
+		    <div class="green_box">
+		        <div class="transparency" style=""></div>
+		        <div class="container">
+		            <h2 class="wow fadeIn h2white" data-wow-delay="0.2s" > <br /><br />Halal Produktion</h2>
+		            <div class="wow fadeIn" data-wow-delay="0.2s" >
+
+		             	Die zwingende Voraussetzung für ein Halal-Produkt ist eine durchgängige und geschlossene Wertschöpfungskette. Von der Beschaffung, Lieferung, Lagerung, Zubereitung, Produktion, Verpackung, Kennzeichnung bis zum Versand muss jeder Schritt die Halal-Konformität des Produktes nachvollziehbar garantieren.<br><br>Die Halal-Produktion wird zu einer echten Herausforderung, wenn die Halal-Produktion in den gleichen Räumlichkeiten wie die Haram-Produktion (Nicht-Halal) realisiert werden muss. Diese Produktion muss durch eine anerkannte islamische Zertifizierungsstelle mit Niederlassung im entsprechenden Land permanent kontrolliert und überwacht werden.<br><br>Die Hersteller müssen neben der Wahrnehmung der relevanten technischen und wirtschaftlichen Aspekte auch die kulturellen und religiösen Gefühle der Verbraucher respektieren.<br><br>
+		            </div>
+<div class="halal-production">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#hrequire">Halal Voraussetzungen</a></li>
+    <li><a data-toggle="tab" href="#hproducts">Halal-Produkte sind:</a></li>
+    <li><a data-toggle="tab" href="#rawmaterial">Rohstoffe</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="hrequire" class="tab-pane fade in active">
+      <h3>Requirement for Food Production</h3>
+      <p>Die zwingende Voraussetzung für ein Halal-Produkt ist eine durchgängige und geschlossene Wertschöpfungskette. Von der Beschaffung, Lieferung, Lagerung, Zubereitung, Produktion, Verpackung, Kennzeichnung bis zum Versand muss jeder Schritt die Halal-Konformität des Produktes nachvollziehbar garantieren.</p>
+      <p>Die Halal-Produktion wird zu einer echten Herausforderung, wenn die Halal-Produktion in den gleichen Räumlichkeiten wie die Haram-Produktion (Nicht-Halal) realisiert werden muss. Diese Produktion muss durch eine anerkannte islamische Zertifizierungsstelle mit Niederlassung im entsprechenden Land permanent kontrolliert und überwacht werden.</p>
+      <p>Die Hersteller müssen neben der Wahrnehmung der relevanten technischen und wirtschaftlichen Aspekte auch die kulturellen und religiösen Gefühle der Verbraucher respektieren.</p>
+      
+    </div>
+    <div id="rawmaterial" class="tab-pane fade">
+      <h3>Rohstoffe</h3>
+      <p>Tierische Rohstoffe:</p>
+      <ol>
+        <li>Rohstoffe von Tieren sind nur dann erlaubt (Halal), wenn sie von Tieren stammen, die erlaubt und gemäss islamischem Recht geschlachtet worden sind. Meerestiere sind eine Ausnahme. Diese müssen nicht geschlachtet werden.</li>
+        <li>Die folgenden Rohstoffe von Tieren sind unzulässig und verboten(Haram): 
+ Fleisch und Nebenprodukte von verendeten Tieren (Kadaver),
+ Blut und Nebenprodukte aus Blut,
+ Fleisch und Nebenprodukte vom Schwein,
+ Das Fleisch und Nebenprodukte von Tieren, die nicht zugelassen sind oder nicht Halal-konform geschlachtet wurden,
+ Das Fleisch von Wild- und Raubtieren und Wildvögel mit Krallen ist ebenfalls verboten.</li>
+        <li>Die bei der Herstellung von Lebensmitteln verwendeten Rohstoffe von Tieren müssen von erlaubten Tieren stammen, die Halal-konform geschlachtet worden sind und über ein Halal-Zertifikat verfügen.</li></ol>
+        <p>Pflanzliche Rohstoffe:</p>
+        <ol>
+        <li>Pflanzliche Rohstoffe sind erlaubt, solange keine Gärung stattfindet und keine zweifelhaften Zusatzstoffe vor und/oder während des Produktionsprozesses eingesetzt worden sind. Diese Anforderungen müssen unbedingt beachtet werden. </li>
+        <li> Alkohol in irgendeiner Form oder Konzentration ist verboten.</li>
+      </ol>
+      <div class="benifits">
+      <h4>Zabihah – Das islamische Schlachten </h4><br>
+      <ol>
+        <li>Das islamische Schlachten ist ein Reinigungsakt. Da Blut verboten ist, soll es mit der Schlachtung grösstenteils ausfliessen.</li>
+        <li> Die islamische Schlachtung hat zum Ziel, Tiere in einer möglichst respektvollen, schnellen und schmerzfreien Weise zu töten</li>
+        <li>Die Schlachtung muss im Namen Gottes, dem Schöpfer allen Lebens erfolgen. Damit bittet der Schlachter Gott um Rechtsleitung.</li>
+        <li>Während des Schlachtprozesses müssen die Arterien, Venen und die Luftröhre des Tieres durchtrennt werden, damit möglichst viel Blut abfliesst. Das Rückenmark darf erst durchtrennt werden, wenn die Enthäutung des Tieres beginnt.</li>
+        <li>Jede/r vernünftige praktizierende/r Muslim/a, der/die das islamische Gesetz versteht und befolgt, kann die Schlachtung vornehmen. Jede/r, die/der den Prozess beherrscht und das in richtiger Weise ausführt, darf die Schlachtung vornehmen.</li>
+        <li>Die islamische Schlachtung ist ein Reinigungsprozess, bei dem das Tier im Namen Gottes geschlachtet und von unreinem Blut gereinigt wird, bevor es konsumiert werden kann. Meerestiere sind schon Halal und müssen nicht geschlachtet werden.</li>
+        <li>In vielen Ländern Europas ist das religiöse Schlachten verboten. Daher müssen Rohstoffe von Tieren für die Halal-Lebensmittel- und Nahrungsergänzungsproduktion aus dem Ausland importiert werden. Diese Rohstoffe müssen immer über ein gültiges Halal-Zertifikat verfügen, ausgestellt von einem autorisierten und global anerkannten und akzeptierten islamischen Institutionellen im jeweiligen Land 
+</li>
+      </ol>
+      </div>
+    </div>
+    <div id="hproducts" class="tab-pane fade">
+      <h3>Halal Produkte</h3>
+      <p>Halal-Produkte sind:</p>
+      <ol>
+        <li>Produkte, hergestellt mit zertifizierten Halal-Rohstoffen und Halal-konformen Ausrüstungen.</li>
+        <li>Produkte aus von Tieren stammenden Rohstoffen, die gemäss islamischem Recht erlaubt und als „rein“ gelten, und aus Tieren, die Halal-konform geschlachtet wurden.</li>
+        <li>Produkte, die Fische oder andere Meeresfrüchte enthalten oder daraus produziert werden, sind grundsätzlich Halal, solange Sie für die menschliche Gesundheit nicht schädlich sind. Fische und andere Meeresfrüchte werden im Islam als "rein" deklariert.</li>
+        <li>Produkte, die keinen Alkohol enthalten.</li>
+        <li>Produkte, die aus pflanzlichen Rohstoffen gewonnen wurden. Pflanzliche Rohstoffe gelten grundsätzlich als Halal, sofern sie für den Konsum nicht schädlich sind und noch keine Gärung eingesetzt hat.</li>
+    </ol>
+    <h3>Erhaltung des Halal-Status</h3>
+    <ol>
+        <li>Um den Halal-Status zu erhalten, müssen die Produkte auf klar bezeichneten Produktionslinien verarbeitet werden (getrennte Produktionslinien sind erforderlich, wenn gleichzeitig „unreine“ und „verbotene“ Stoffe im gleichen Produktionsbetrieb hergestellt werden).</li>
+        <li>Eine Produktionslinie kann nur einmal in den Halal-Status gebracht werden.</li>
+<li>Ein regelmässiger Wechsel von „schmutzig“ oder „unrein“ (Haram) zu „sauber“ (Halal) und umgekehrt, erfüllt die Halal-Anforderungen nicht und ist nicht erlaubt. Diese Regel gilt auch für die verwendeten Gebrauchsgegenstände.</li>
+<li>Die klare Absicht, Halal zu produzieren, muss immer erkennbar sein. Bei jeder Produktionsänderung (z.B. Rohstoffe oder Verfahren) muss immer die Zertifizierungsstelle konsultiert werden.
+</li>
+      </ol>
+    </div>
+    
+  </div>
+</div>            
+		        </div>
+		        <div class="clearfix"></div>
+		    <a href="#" class="next-section messe"><div class="next-section-image" style="
+		    width: 92px;background-color: rgba(68,161,43,0.5); "><i style="font-style: normal;"></i></div></a>
+
+		    </div>
+		</div>
+		<style>
+		   #key3visual .container div {
+		        color: #FFFFFF; /* TODO Integration: einstellbar  */
+		        text-align: center; /* TODO Integration: possible values: left, center, right  */
+		        
+				line-height: 25px;
+		    }
+		   #key3visual h2 {
+		        color: #FFFFFF; /* TODO Integration: einstellbar  */
+		        text-align: center; /* TODO Integration: possible values: left, center, right  */
+		        
+		    }
+		</style>
+
+      <!--Services End  -->
+
+
+
+
+	
+
+	
+<!-- Halal production start -->
+		
+			<div class="clearfix"></div>
+		<img src="../Layout/images/Marketingpaket/Test-Bilder/Parralax-Bild_08.jpg" class="parallax_mobile" style="display:none; width:100%;" alt="">
+		
+		
+		<div id="sildeshow" data-navigationTitle="Halal Erklärt" class="module parallax" data-parallaxValue="0.2" style="background-image: url('../Layout/images/Marketingpaket/Test-Bilder/Parralax-Bild_08.jpg');">
+		    <div class="green_box">
+		        <div class="transparency" style="background:#44a12b;"></div>
+		        <div class="container">	
+		        <div class="hexp">
+		        <h2>Halal Erklärt</h2>
+		        <br>
+		        <p>Die nachfolgenden Erläuterungen der wichtigsten Begriffe sollen Ihnen helfen, das Halal-Konzept besser zu verstehen. Die vorhandenen Einschränkungen werden für Sie nachvollziehbar.</p>
+		        <p>Ergänzend finden Sie auch die jeweiligen Referenzen aus dem heiligen Qur'an und Hadith, die Ihnen helfen, das Konzept von Halal und Haram besser zu verstehen. Zusammen mit der Erläuterung der wichtigsten Begriffe sind Sie in der Lage, mit Ihrem Halal-Dienstleister auf gleichem Niveau zu kommunizieren.</p>
+		        <p>Wir haben auch eine Liste häufig genannter verbotener Inhalte/Zutaten/Produkte (Haram) zum Download bereitgestellt.</p>
+		        <div class="collapse-halal">
+		        	<div class="panel-group" id="accordion">
+		        		    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#whalal">What is Halal?</a>
+        </h4>
+      </div>
+      <div id="whalal" class="panel-collapse collapse in">
+        <div class="panel-body">
+        	<h3>What is Halal?</h3>
+        	<p>When we go through what is lawful and permitted to humans, we evidently come across the words “Halal” and “Good”. Halal (حَلاَلً , ḥalāl , Halaal) is an Arabic term designating any object or an action which is permissible to use or engage in, according to Islamic law. The term is widely used to designate food seen as permissible according to Islamic law (Sharia).</p>
+        	<p>Interestingly nowhere in quran does it state that it is permissible only for muslims, rather all human-beings are invited to eat food which is halal (permissible, lawful), pure and good for health. That means it is hygienically and toxicologically free from all sorts of hazardous agents, and hence is good and safe for consumption.</p>
+    	</div>
+      </div>
+
+    </div>  
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#wharam">Was Ist Haram</a>
+        </h4>
+      </div>
+      <div id="wharam" class="panel-collapse collapse">
+        <div class="panel-body">
+        	<h3>Was Ist Haram</h3>
+        	
+        	      <p>Haram (arabisch: حرام) (auch Haraam) ist ein arabischer Begriff und bedeutet "verboten". Als Haram wird alles angesehen, was gemäss islamischer Rechtsprechung verboten ist. Das Gegenteil ist Halal.</p>
+        	      <p>Der religiöse Begriff Haram kann für folgendes verwendet werden:</p>
+        	      <ol>
+        	      	<li>Bestimmte Verhaltensweisen wie Ehebruch oder Missbrauch.</li>
+        	      	<li> Bestimmte Lebensmittel oder Lebensmittelzutaten wie Alkohol oder Schweinefleisch</li>
+        	      	<li>Für Lebensmittel oder Gegenstände, die eigentlich Halal wären, welche aber in eine oder andere Weise manipuliert wurden ( so z.B. Fleisch von einem Tier, das nicht rechtens geschlachtet wurde).</li>
+        	      	<li>Bestimmte Objekte</li>
+        	      	<li>Unrechtmässig durch Sünde erworbener Reichtum. Beispiele sind mit Betrug, Diebstahl, Korruption oder Mord erworbenes Geld. Für einen guten Muslim ist es unrechtmässig, mit solchen Mitteln Reichtum zu erlangen. Jeder Muslim, der von Leistungen oder Reichtum lebt, die mit verbotenen Mittel generiert wurden, ist kein richtiger Muslim.
+</li>
+        	      </ol>
+    	</div>
+      </div>
+
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#Impterms">Wichtige Begriffe</a>
+        </h4>
+      </div>
+      <div id="Impterms" class="panel-collapse collapse">
+        <div class="panel-body">
+        	<h3>Wichtige Begriffe</h3>
+      <p><b>"Haram"</b> beschreibt hingegen alles, was nach islamischem Recht "unzulässig" oder "verboten" ist.</p>
+      <p>Mit <b> "Najs"</b> werden Stoffe differenziert, die von ihrer Herkunft als "unrein" gelten und die nicht gereinigt werden können.</p>
+      <p><b>"Mashbooh" </b>bedeutet "fragwürdig“ und wird für Materialien verwendet, deren Status unklar ist. Falls Lebensmittel fragwürdige oder unzulässige (Haram) Zutaten enthalten, wird vom Konsum ganz abgeraten.</p>
+      <p>Als „Makruh“ gilt alles, was „verpönt“ und „unbeliebt“ ist. Die Vermeidung wird belohnt, aber es ist nicht ausdrücklich verboten. Auch diese Grauzone (zwischen erlaubtem und verbotenem) gilt es für die Muslime vorsichtshalber zu meiden </p>
+      <p><b>"Tayyeb"</b> gleichbedeutend mit "Reinheit" und "Qualität" beinhaltet alles, was sicher und gesund ist. </p>
+      <p>Muslime werden von ihrer Religion dazu angehalten, nur Halal und Tayyeb zu konsumieren.</p>
+      <p> So ist die Mehrheit der Lebensmittel als "Halal" anzusehen, solange sie keine zweifelhaften oder nicht erlaubten Zutaten enthalten.</p>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Glossar</a>
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">
+        	<h3>Glossar</h3>
+      <h4>Ahlul Kitab (Volk des Buches)</h4>
+      <p>Ein Begriff aus dem Koran. Er bezieht sich auf die Menschen, die göttlichen Schriften erhalten und ist eine Referenz an die Christen und die Juden.</p>
+      <h4>ALLAH</h4>
+      <p>Der Eigenname Gottes, des Schöpfers. Allah ist ein einziges Wesen ohne Partner.</p>
+      <h4>Antioxidant</h4>
+      <p>Verbindungen, verzögern oder verhindern die Oxidation von Lebensmitteln. Beispiele sind BHA, BHT und Zitronensäure.</p>
+      <h4>BHA</h4>
+      <p>Butyliertes Hydroxyanisol. Es ist ein Antioxidans. BHA ist Halal.</p>
+      <h4>BHT</h4>
+      <p>Butyliertes Hydroxytoluol. Es ist ein Antioxidans. BHT ist Halal.</p>
+      <h4>Carrageenan</h4>
+      <p>Eine von Irish Moss, die ein Gel in Lebensmitteln Systeme Formen zu extrahieren. Es ist als Lebensmittelzusatzstoff verwendet. Carrageen wird Halal.</p>
+      <h4>Kasein</h4>
+      <p>Die wichtigsten Eiweiß in der Milch. Es ist in der Herstellung von Käse am eingesetzt. Es kann sein, Halal oder Haram, je nach dem verwendeten Enzym um es zu produzieren.
+</p>
+      <h4>Kakaomasse</h4>
+      <p>Ein semi-viskosen süßen Sirup mit Schokolade, Zucker und weiteren Zutaten. Es ist bei der Herstellung Süßigkeiten, Getränken und anderen Lebensmitteln Schokoladengeschmack. Kakaomasse ist nicht-alkoholische und Halal, es sei denn, eine Kontamination mit haram Zutaten.</p>
+      <h4>Klärmitteln</h4>
+      <p>Eine Gruppe von chemischen Verbindungen in flüssigen Lebensmitteln zur Entnahme von Trübungen durch Schwebstoffe.</p>
+      <h4>Weinstein</h4>
+      <p>Ein weißes, kristallines Chemikalie namens Kalium bitartarate.</p>
+      <h4>Kulturen</h4>
+      <p>Mehrere Bakterien und andere Mikroben einzeln oder in Kombination, Gärung in mehreren Lebensmittel zu bringen. Sie sind in der Herstellung von fermentierten Milch, Käse und fermentierten Fleischprodukten eingesetzt.</p>
+      <h4>Diglyceriden</h4>
+      <p>Fettstoffen, Glycerin und zwei Fettsäuren. Diglyceriden kann aus tierischen oder pflanzlichen Fetten hergestellt werden, und sie sind als Emulgator in Lebensmitteln verwendet werden. Wenn von Halal Tieren in der islamischen oder aus pflanzlichen Quellen geschlachtet, sind sie Halal. Ansonsten sind sie haram. Derzeit ist es am besten, für Produkte mit nur 100% pflanzlich Diglyceride aussehen.</p>
+      <h4>Emulgatoren</h4>
+      <p>Eine chemische Substanz, die Fette hält (oder Öle), dispergiert in Wasser oder Wasser dispergiert in Fetten (oder Öle). Emulgatoren sind in Lebensmitteln, die sowohl Fette (oder Öl) und Wasser verwendet. Beispiele für Emulgatoren sind Lecithin und Mono-und Diglyceride. Emulgatoren können aus tierischen oder pflanzlichen Quellen hergestellt werden. Wenn von Halal Tieren in der islamischen oder aus pflanzlichen Quellen geschlachtet, sind sie Halal. Ansonsten sind sie haram.</p>
+      <h4>Enzymes</h4>
+      <p>Eiweißstoffe gefunden und ausgebildet in allen lebenden Zellen. Sie bewirken chemische Reaktionen innerhalb und außerhalb des Körpers, ohne selbst verbraucht wird. Sie werden von Tieren oder Mikroorganismen gewonnen und sind in der Lebensmittelindustrie verwendet</p>
+      <p>Industrie zur Herstellung von Käse und anderen Produkten. Wenn von Halal Tieren in der islamischen geschlachtet, aus pflanzlichen Quellen oder aus Mikroorganismen hergestellt, sie sind Halal. Ansonsten sind sie haram. Derzeit ist es am besten für die mikrobielle Enzyme zu suchen.</p>
+      <h4>Fatwa</h4>
+      <p>Religionsedikte</p>
+      <h4>Gelatin</h4>
+      <p>Eine abgeleitete Protein tierischen Ursprungs. Es wird aus den Schalen, Knochen und Bindegewebe hergestellt und verwendet in Desserts und als Zusatzstoff in einer Vielzahl von Lebensmitteln. Wenn von Halal Tieren in der islamischen geschlachtet wurde, ist es Halal. Ansonsten ist es haram. Sofern ein Produkt mit Gelatine Halal zertifiziert ist oder sagt Halal Gelatine, ist es sehr wahrscheinlich haram und sollte vermieden werden.</p>
+      <h4>GHP</h4>
+      <p>Gute Hygienepraxis</p>
+      <h4>GMF</h4>
+      <p>Gentechnisch veränderte Lebensmittel (GMF) sind Lebensmittel aus genetisch veränderten Organismen. Gentechnisch veränderte Organismen haben bestimmte Veränderungen in ihrer DNA durch gentechnologische eingeführt hatte, mit einem Prozess der entweder Cisgenesis oder Transgenese. Diese Techniken sind sehr viel präziser als Mutagenese (Mutationszüchtung) wenn ein Organismus einer Strahlung ausgesetzt ist oder Chemikalien zu einer unspezifischen, aber stabile Veränderungen zu schaffen. Andere Techniken, durch die Menschen ändern Nahrungsmittel Organismen enthalten selektive Zucht (Pflanzenzucht und Tierzucht) und somaklonale Variation.</p>
+      <h4>GVO</h4>
+      <p>Ein gentechnisch veränderter Organismus (GVO) oder gentechnisch veränderter Organismen (GEO) ist ein Organismus, dessen genetisches Material verändert wurde mit Hilfe gentechnischer Methoden.</p>
+      <h4>GMP</h4>
+      <p>Good Manufacturing Practices sind Richtlinien, die einen Überblick über die Aspekte der Herstellung und Prüfung, dass die Qualität eines Produktes beeinflussen können</p>
+      <h4>Hadith</h4>
+      <p>Hadith sind Erzählungen aus den Worten und Taten des islamischen Propheten Mohammad (Friede sei mit ihm). Hadith sind von den traditionellen Schulen der Rechtsprechung als wichtiges Werkzeug für das Verständnis des Koran und in Fragen der Rechtsprechung angesehen.</p>
+      <h4>Halal</h4>
+      <p>Das arabische Wort "Halal" bedeutet, dass die "rechtmäßig" für den Verzehr durch den Menschen.</p>
+      <h4>Hanafi</h4>
+      <p>Einer der islamischen Schule des Denkens von Imam Abu Hanifa gegründet. Unter den vier etablierten sunnitischen Schulen des juristischen Denkens im Islam, ist der Hanafi Schule die älteste. Es hat einen guten Ruf für die stärkere Betonung auf die Rolle der Vernunft und als etwas liberaler als die anderen drei Schulen.</p>
+      <p>Die Hanafi Schule hat auch die meisten Anhänger unter den vier großen sunnitischen Schulen. (Sowohl das Osmanische Reich und das Mogulreich waren Hanafi so der Hanafi Schule immer noch weit verbreitet ist in ihrer ehemaligen Ländereien).</p>
+      <p>Heute ist die vorherrschende Hanafi Schule unter den Sunniten in Zentralasien, Afghanistan, Pakistan, Bangladesch, Indien, China sowie im Irak, Mauritius, Syrien, Türkei, Albanien, Bosnien, Kosovo, Mazedonien auf dem Balkan und im Kaukasus. Es ist auch in großer Zahl in anderen Teilen der muslimischen Welt folgten.</p>
+      <h4>Hanbali</h4>
+      <p>Hanbali ist eine der vier Schulen Madh'habs (Riten) des Fiqh oder religiösen Rechts im sunnitischen Islam. Die Rechtsprechung der Schule wurde von den Schülern von Imam Ahmad bin Hanbal gestartet.</p>
+      <p>Hanbali Rechtsprechung ist auf der Arabischen Halbinsel beliebt.</p>
+      <h4>Haram</h4>
+      <p>"Haram" bedeutet "rechtswidrig" oder "verboten" nach islamischem Recht.</p>     <h4>Ijma’</h4>
+      <p>Ijma 'ist ein arabischer Begriff, der sich ideal, um den Konsens der Ummah (die Gemeinschaft der Muslime oder Anhänger des Islam).</p>      
+      <h4>Schmalz</h4>
+      <p>Eine gesättigte Fett vom Schwein. Es ist in Frittieröl und Backwaren verwendet. Schmalz ist haram und alle Produkte mit Schmalz haram sind.</p>      
+      <h4>Lecithin</h4>
+      <p>Ein Emulgator aus Glycerin besteht, zwei Fettsäuren, Phosphorsäure und Cholin. Es wird aus Eigelb, Soja oder tierische Fette extrahiert. Wenn von Halal Tieren in der islamischen geschlachtet, aus pflanzlichen Quellen oder Eigelb gemacht, ist es Halal.</p>
+      <p>Ansonsten ist es haram. Am besten ist es, Produkte zu Halal zertifiziert sind oder enthalten pflanzliches Lecithin oder Sojalecithin Stick.</p>      
+      <h4>Makruh</h4>
+      <p>was makruh ist eine Abneigung oder beleidigend wirken (wörtlich "gehasst"). Obwohl es nicht haram (verboten) und daher nicht eine Sünde, eine Person, die von dieser Maßnahme wird belohnt verzichtet. Muslime sind aufgefordert, solche Aktionen, wenn möglich zu vermeiden. Dies ist eine der Grad der Zustimmung (ahkam) im islamischen Recht.</p>
+      <h4>Maliki</h4>
+      <p>Die Maliki Madhhab ist eine der vier Schulen des Fiqh oder religiösen Rechts im sunnitischen Islam.</p>
+      <p>Es ist die drittgrößte der vier Schulen, die von ca. 15% der Muslime, vor allem in Nordafrika, Westafrika, Vereinigte Arabische Emirate gefolgt, und einige Teile von Saudi-Arabien.</p>
+      <h4>Mashbooh</h4>
+      <p>Eine arabische Wort für Verdächtige oder fraglich. Mashbooh Begriffe können von Halal oder Haram Quellen erzeugt werden. Wenn die spezifische Quelle nicht bekannt ist, werden die Elemente verdächtigen oder fraglich.</p>
+      <h4>Monoglycerides</h4>
+      <p>Fettstoffen, Glycerin und einer Fettsäure. Monoglyceride aus tierischen oder pflanzlichen Fetten hergestellt und sind als Emulgatoren in Lebensmitteln eingesetzt. Wenn von Halal Tieren in der islamischen oder aus pflanzlichen geschlachtet gemacht</p>
+      <p>Quellen, sie sind Halal. Ansonsten sind sie haram. Derzeit ist es am besten, für Produkte mit nur 100% pflanzlich Diglyceride aussehen.</p>
+      <h4>Najs</h4>
+      <p>"Najs" Was Lebensmittel, die sich selbst als "unrein" sind und das kann nicht gereinigt werden. Es gibt 3 Differenzierungen:</p>
+      <p>Najs Mughallazah = Schwere Dreck<br>
+      Najs Mukhaffafah = Light Dreck<br>
+      Najs Mutawassitah = Mittel Dreck</p> 
+      <h4>Pepsin</h4>
+      <p>Ein Enzym extrahiert aus tierischen Mägen, vor allem Schwein Mägen, und verwendet bei der Herstellung von Käse. Pepsin ist haram.</p>
+      <h4>Koran</h4>
+      <p>Die göttliche Offenbarung an den Propheten Muhammad, Allahs Frieden und Segen Allahs seien auf ihm. Der Koran ist die Quelle der Weisheit und Recht für die Muslime.</p>
+      <h4>Lab</h4>
+      <p>Ein Enzym extrahiert aus dem 4. Magen von Kälbern und verwendet bei der Herstellung von Käse. Wenn die Kälber in der islamischen Weg geschlachtet werden, ist es Halal. Ansonsten sollte vermieden werden. Mikrobielle Lab ist Halal.</p>
+      <h4>Shafie</h4>
+      <p>Die Shafi'i Schule des Fiqh ist nach Imam asch-Schafi'i benannt. Die Shafi'i Schule ist das ganze Ummah gefolgt und ist die offizielle Madhab der traditionsreichsten Gelehrte und führende sunnitische Behörden. Es ist auch als offizieller Madhab durch die Regierungen von Brunei Darussalam und Malaysia anerkannt. Darüber hinaus nutzt die Regierung von Indonesien dieser Madhab für die indonesische Zusammenstellung der Scharia.
+</p>
+      <p>Es ist das beherrschende Madhab von Syrien, Palästinensische Gebiete, Libanon, 
+      </p>
+      
+      </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#nobintention">Reinheit Der Absicht</a>
+        </h4>
+      </div>
+      <div id="nobintention" class="panel-collapse collapse">
+        <div class="panel-body">
+        	<h3>Reinheit Der Absicht</h3>
+      <p>Im Islam wird jede Handlung einer Person als Teil einer ganzen Gemeinschaft angesehen und hängt ab von der Reinheit seiner Absicht, die vor Tätigkeitsbeginn ausgesprochen werden muss. Es ist äusserst wichtig, den Namen Gottes vor jeder Handlung anzurufen, um seine Rechtsleitung zu erhalten. Das Ausrufen und die Erfüllung dieser Pflicht gegenüber Allah hat die höchste Priorität für jeden Muslim. Alle Taten werden so vollbracht, dass mögliche und/oder erwartete Fehler vollständig vermieden werden können.</p>
+      <p>Es ist daher von grösster Bedeutung, dass alle im Produktionsprozess und/oder im Umgang mit den Halal-Produkten beteiligten Personen diese strengen Anforderungen erfüllen und alle notwendigen Vorkehrungen dazu treffen.
+</p>
+    </div>
+      </div>
+    </div>    
+ 
+
+  </div>
+		        </div>
+		        </div>
+		        </div>
+		<!-- inner slider area -->
+		        <!-- <div class="container">
+		            <h2 class="wow fadeIn h2white" data-wow-delay="0.2s">
+		            	<span style="text-align:center;color:#4b4b4b;"><center>Halal Explained</span><br>
+		            </h2>
+		
+		            <p style="color:#000000;margin-bottom:20px;" class="wow fadeIn" data-wow-delay="0.5s">
+		            	<span style="text-align:center;color:#FFFFFF;"></span>
+		            </p>
+		      
+		          <div class="slider_navi row-fluid">
+
+						
+							
+						
+										
+							<div class="slider_navi_item span12">
+								
+<h2>Halal Explained</h2>
+
+<div style="text-align: center;"><p>Starting off with a detailed explanation of Halal and Haram, the following chapters will allow you to understand the concept of Halal dietary laws. Furthermore it will elaborate on the restrictions which are in place.</p>
+<p>
+Apart from that you will also find the respective references from Qur'an and Hadith, which should help you to understand the concept of Halal and Haram. An explanation of the most important terms shall make your dealing with Halal certifying body an easier task.</p>
+<p>
+We have also included a list of commonly named Haram (forbidden) things.</p></div>
+
+
+   
+
+							</div>
+							
+						</div>
+							
+						<div class="rslides_container" style="display:block;">
+		                	<ul class="rslides">
+		                    			
+										
+	<img src="../Layout/images/Marketingpaket/SliderModule/SliderModul_Ausstellerverzeichnis_D.jpg" alt="[slidermodul_ausstellerverzeichnis_d:MEDIASTORE_LEAF]@5ac670b3">	
+
+
+		                    			
+										
+	<img src="../Layout/images/Marketingpaket/SliderModule/SliderModul_Produktverzeichnis_D.jpg" alt="[slidermodul_produktverzeichnis_d:MEDIASTORE_LEAF]@1a112654">	
+
+
+		                    			
+										
+	<img src="../Layout/images/Marketingpaket/SliderModule/SliderModul_Besuchererfassung_D.jpg" alt="[slidermodul_besuchererfassung_d:MEDIASTORE_LEAF]@5beb622a">	
+
+
+		                    			
+										
+	<img src="../Layout/images/Marketingpaket/SliderModule/SliderModul_OnlinePressefach_D.jpg" alt="[slidermodul_onlinepressefach_d:MEDIASTORE_LEAF]@3a79e28b">	
+
+
+		                    			
+										
+	<img src="../Layout/images/Marketingpaket/SliderModule/SliderModul_Matchmaking_D.jpg" alt="[slidermodul_matchmaking_d:MEDIASTORE_LEAF]@180831ab">	
+
+
+		                    			
+										
+	<img src="../Layout/images/Marketingpaket/SliderModule/SliderModul_NeuheitenDatenbank_D.jpg" alt="[slidermodul_neuheitendatenbank_d:MEDIASTORE_LEAF]@41f4dde0">	
+
+
+		                    			
+										
+	<img src="../Layout/images/Marketingpaket/SliderModule/SliderModul_Terminplaner_D.jpg" alt="[slidermodul_terminplaner_d:MEDIASTORE_LEAF]@3312bef4">	
+
+
+		                    		
+		               		</ul>
+		            	</div>
+		            	
+		            	
+							
+		
+		
+		        </div> -->
+		        <!-- inner slider area -->
+		
+		        <div class="clearfix"></div>
+		
+		    <a href="#" class="next-section messe"><div class="next-section-image" style="
+		    width: 92px;background-color: rgba(68,161,43,0.5); "><i style="font-style: normal;"></i></div></a>
+
+		    </div>
+		</div>
+		<style>
+		    /* Farben der Blöcke inkl. der Schriftfarbe wenn der Block weiss ist */
+		    #sildeshow .slider_navi {
+		                           height: 300px;
+		                       }
+		    #sildeshow .slider_navi_item:nth-child(1):after {
+		                           border-top-color: #bf2644;
+		                           color:yellow;
+		                       }
+		
+		    #sildeshow .slider_navi_item:nth-child(2):after {
+		                           border-top-color: #ffcb2c;
+		                       }
+		
+		    #sildeshow .slider_navi_item:nth-child(3):after {
+		                           border-top-color: #199fd9;
+		                       }
+		
+		    #sildeshow .slider_navi_item:nth-child(4):after {
+		                           border-top-color: #ffffff;
+		                       }
+		
+		    #sildeshow .slider_navi_item:nth-child(1) {
+		                           background-color: #bf2644;
+		                           z-index: 10;
+		                       }
+		
+		    #sildeshow .slider_navi_item:nth-child(2) {
+		                           background-color: #ffcb2c;
+		                       }
+		
+		    #sildeshow .slider_navi_item:nth-child(3) {
+		                           background-color: #199fd9;
+		                       }
+		
+		    #sildeshow .slider_navi_item:nth-child(4) {
+		                           background-color: #ffffff;
+		                           color: #41a826;
+		                       }
+		
+		    #sildeshow .slider_navi_item:nth-child(4) h2 {
+		                           color: #41a826;
+		                       }
+		                       
+		    
+		    /* FS */                   
+		           
+		    
+		
+				
+				    #sildeshow .slider_navi_item:nth-child(1):after {
+					    border-top-color: #0773b3;
+				    	color:yellow;
+				    }
+				     			
+				    #sildeshow .slider_navi_item:nth-child(1) {
+				       	background-color: #0773b3;
+				    }
+				    
+				
+				
+				    #sildeshow .slider_navi_item:nth-child(1) h2 {
+				    	color: #ffffff;
+				   	}
+				       			
+		                          		
+			
+		                      
+		    /* FS */                                
+		                       
+		</style>
+
+
+
+
+
+
+	
+
+	
+<!-- Kontaktieren Sie Uns  -->
+		
+		<div class="clearfix"></div>
+		<img src="../Layout/images/Marketingpaket/cnt12.jpg" class="parallax_mobile" style="display:none; width:100%;" alt="">
+		
+		<div id="spaltentext_3" data-navigationTitle="Kontakt " class="module parallax text_columns" data-parallaxValue="0.2" style="background-image: url('../Layout/images/Marketingpaket/cnt12.jpg');">
+		  <div class="green_box" style="min-height:400px">
+		    <div class="transparency" style=" background-image: url('../Layout/images/Marketingpaket/Hintergrundbild_Teasertext-Modul_1.jpg');"></div>
+		    <div class="container">
+		      <div class="row-fluid fadeIn animated">
+		
+		
+			
+				
+			
+		
+				
+				    <div class="span12" 	<div >
+						
+
+
+
+<div class="contact">
+<h2 style="text-align:center;color:#4c4c4c;" class="h2white"><br /><br /> Please leave a message:</h2>
+<form id="form1" name="form1" method="post" action="">
+  <table width="" border="0" cellspacing="6" cellpadding="2">
+    <tbody><tr>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="25%"> Name </td>
+      <td><label>
+        <input class="form-control"name="contact_name" type="text" id="contact_name" size="35">
+      </label></td>
+    </tr>
+    <tr>
+      <td>Position</td>
+      <td><label>
+        <input name="position" type="text" id="position" size="35">
+      </label></td>
+    </tr>
+    <tr>
+      <td>Organisation/Company</td>
+      <td><label>
+      <input name="company" type="text" id="company" size="35">
+      </label></td>
+    </tr>
+    <tr>
+      <td>Country</td>
+      <td><label>
+        <input name="country" type="text" id="country" size="35">
+      </label></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><label>
+      <input name="email" type="text" id="email" size="35">
+      </label></td>
+    </tr>
+    <tr>
+      <td>Website</td>
+      <td><label>
+        <input name="website" type="text" id="website" size="35">
+      </label></td>
+    </tr>
+    <tr>
+      <td>Telephone</td>
+      <td><input name="telephone" type="text" id="telephone" size="35"></td>
+    </tr>
+    <tr>
+      <td>Fax</td>
+      <td><input name="fax" type="text" id="fax" size="35"></td>
+    </tr>
+    <tr>
+      <td>Type of business </td>
+      <td><select name="business" id="business">
+        <option value="Producer">Producer</option>
+        <option value="Distributor">Distributor</option>
+        <option value="Supplier">Supplier</option>
+        <option value="Service provider ">Service provider </option>
+        <option value="Restaurant">Restaurant</option>
+        <option value="Catering">Catering</option>
+        <option value="Take-away">Take-away</option>
+        <option value="Others">Others</option>
+      </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Message/Inquiry</td>
+      <td><label>
+        <textarea name="inquiry" cols="27" rows="5" id="inquiry"></textarea>
+      </label></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><label>
+        <input type="submit" name="Submit" value="Submit" class="btn btn-success">
+        <!-- <input type="reset" name="Submit2" value="Reset"> -->
+      </label></td>
+    </tr>
+  </tbody></table>
+  <label></label>
+</form>
+</div>
+<br><br>
+<h3 style="text-align: center; color:#000000;">Our Office Address</h3>
+<p style="text-align:center;color:#000000;line-height:25px !important;     ">Cesar-Stünzi-Strasse 13<br>
+79618 Rheinfelden<br>
+Germany  <br><br><font color="#11642e"><FONT SIZE="+2"><strong>Email: info@halalcs.eu<br></strong></p>
+
+<!-- Modal Start  -->
+<div class="moda" style="text-align: center;">
+		<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" style="color:#000000; background:transparent;">
+  Disclaimer
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"  height="auto" style="width:800px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Disclaimer</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<p style="color:#000000; font-size: 12px;">
+        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+<p style="color:#000000; font-size: 12px;">
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+</p>
+<p style="color:#000000; font-size: 12px;">
+Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+</p>
+<p style="color:#000000; font-size: 12px;">
+Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+</p>
+<p style="color:#000000; font-size: 12px;">
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+</p>
+<p style="color:#000000; font-size: 12px;">
+Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+</p>
+<p style="color:#000000; font-size: 12px;">
+Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+</p>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+</div>
+<!-- Modal End  -->
+<br>
+<h3  style="color:#000000; text-align: center;">
+	Kontaktadresse
+</h3>	
+<p style="color:#000000; font-size: 12px;">
+	Kontaktadresse<br>
+Halal Certification Services (EU) GmbH<br>
+Cesar-Stünzi-Strasse 13<br>
+79618 Rheinfelden<br>
+Germany<br>
+info@halalcs.eu<br>
+<br>
+Vertretungsberechtigte Personen<br>
+Farhan Tufail, Geschäftsführer<br>
+<br>
+Handelsregistereintrag<br>
+Eingetragener Firmenname: Halal Certification Services (EU) GmbH<br>
+Nummer: HRB 713367<br>
+Handelsregisteramt: Freiburg i. Br.<br>
+<br>
+Mehrwertsteuernummer<br>
+DE304324101<br>
+<br>
+<b>Haftungsausschluss</b><br>
+Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität, Zuverlässigkeit und Vollständigkeit der Informationen.
+Haftungsansprüche gegen den Autor wegen Schäden materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der veröffentlichten Informationen, durch Missbrauch der Verbindung oder durch technische Störungen entstanden sind, werden ausgeschlossen.<br>
+Alle Angebote sind unverbindlich. Der Autor behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen.
+<br>
+<b>Haftung für Links</b><br>
+Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs Es wird jegliche Verantwortung für solche Webseiten abgelehnt. Der Zugriff und die Nutzung solcher Webseiten erfolgen auf eigene Gefahr des Nutzers oder der Nutzerin.
+<br>
+
+<b>Urheberrechte</b><br>
+Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien auf der Website gehören ausschliesslich der Firma Halal Certification Services (EU) GmbH oder den speziell genannten Rechtsinhabern. Für die Reproduktion jeglicher Elemente ist die schriftliche Zustimmung der Urheberrechtsträger im Voraus einzuholen.
+<br>
+<b>Datenschutz</b><br>
+Gestützt auf Artikel 13 der schweizerischen Bundesverfassung und die datenschutzrechtlichen Bestimmungen des Bundes (Datenschutzgesetz, DSG) hat jede Person Anspruch auf Schutz ihrer Privatsphäre sowie auf Schutz vor Missbrauch ihrer persönlichen Daten. Wir halten diese Bestimmungen ein. Persönliche Daten werden streng vertraulich behandelt und weder an Dritte verkauft noch weiter gegeben.<br>
+In enger Zusammenarbeit mit unseren Hosting-Providern bemühen wir uns, die Datenbanken so gut wie möglich vor fremden Zugriffen, Verlusten, Missbrauch oder vor Fälschung zu schützen.<br>
+Beim Zugriff auf unsere Webseiten werden folgende Daten in Logfiles gespeichert: IP-Adresse, Datum, Uhrzeit, Browser-Anfrage und allg. übertragene Informationen zum Betriebssystem resp. Browser. Diese Nutzungsdaten bilden die Basis für statistische, anonyme Auswertungen, so dass Trends erkennbar sind, anhand derer wir unsere Angebote entsprechend verbessern können.Error! Filename not specified.<br>
+
+</p>
+
+					</div>
+				
+				
+				
+		
+		      </div>
+		    </div>
+		    <div class="clearfix"></div>
+		     <a href="#" class="next-section messe"><div class="next-section-image" style="
+		    width: 92px;background-color: rgba(68,161,43,0.5); "><i style="font-style: normal;"></i></div></a>
+
+		 </div>
+		</div>
+	<!-- Halal Explained end -->
+ 
+      
+   
+		<div class="clearfix"></div>
+		<div id="kontakt_content" style="background-position: 50% 118px;" >
+		
+		    <div class="transparency"></div>
+		    <div class="container content_white" >
+		        <div class="row-fluid footer" style="margin-bottom:30px;margin-top:30px;">
+		           <!--  <div class="span2" style="min-width:200px">
+		
+		                <a href="#" target="_blank" id="footer1" ></a>
+		                <br><a href="http://www.koelnmesse.de/Koelnmesse/impressum-2.php" target="_blank" id="footer2">Impressum</a>
+		            </div> -->
+		           <!--  <div class="span2" style="min-width:250px" >
+		                <a href="http://www.koelnmesse.de/Koelnmesse/sicherheit-und-datenschutz-2.php" target="_blank" id="footer3">Datenschutz & Sicherheit</a>
+		                <br><a href="http://www.koelnmesse.de/Koelnmesse/Messen-und-Veranstaltungen/index.php" target="_blank" id="footer4">Weitere Messen & Veranstatlungen</a>
+		            </div> -->
+		            <!-- <div class="span2" style="min-width:200px">
+		                <a href="#" target="_blank" id="footer5"></a>
+		
+		            </div> -->
+		            <div class="span12" style="text-align: center;"> 
+		            	
+	 					   <a href="#" target="_blank" id="footer6"><img src="../Layout/images/logo_km1.png" style=""></a>
+						
+		            </div>
+		        </div>
+		    </div>
+		
+		</div>
+    </div>
+    
+    <!-- Javascript -->
+	<script type="text/javascript" src="../Layout/js/wow.min.js"></script>
+	<script>
+	 
+	    new WOW().init();
+	</script>
+	<script type="text/javascript" src="../Layout/js/easing.1.3.js"></script>
+	<script type="text/javascript" src="../Layout/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../Layout/js/jquery.sequence-min.js"></script>
+	<script type="text/javascript" src="../Layout/js/bootstrap-collapse.js"></script>
+	<script type="text/javascript" src="../Layout/js/scrollspy.js"></script>
+	<script type="text/javascript" src="../Layout/js/holder.js"></script>
+	<script type="text/javascript" src="../Layout/js/jquery.tubeplayer.min.js"></script>
+	<!-- charts -->
+	<script type="text/javascript" src="../Layout/js/canvasjs.min.js"></script>
+	<!-- jQuery Isotope script-->
+	<script type="text/javascript" src="../Layout/js/isotope.min.js"></script>
+	<!--CarouFredSel plugin -->
+	<script type="text/javascript" src="../Layout/js/carouFredSel.min.js"></script>
+	<script type="text/javascript" src="../Layout/js/mousewheel.min.js"></script>
+	<script type="text/javascript" src="../Layout/js/touchSwipe.min.js"></script>
+	<script type="text/javascript" src="../Layout/js/transit.min.js"></script>
+	<!-- Parallax Script-->
+	<script type="text/javascript" src="../Layout/js/nav.js"></script>
+	<script type="text/javascript" src="../Layout/js/parallax.js"></script>
+	<script type="text/javascript" src="../Layout/js/inview.js"></script>
+	<!-- POpup Style -->
+	<script type="text/javascript" src="../Layout/js/popup.js"></script>
+	<!-- Fencey Gallery -->
+	<script type="text/javascript" src="../Layout/js/fancybox.js"></script>
+	<!-- Layout Script-->
+	<script type="text/javascript" src="../Layout/js/countUp.min.js"></script>
+	<script src="http://maps.googleapis.com/maps/api/js"></script>
+	<script type="text/javascript" src="../Layout/js/script.js"></script>
+	<script type="text/javascript" src="../Layout/js/responsiveslides.min.js"></script>
+	<script src="../Layout/js/jquery.scrolldepth.min.js"></script>
+	<script type="text/javascript">
+		$('div.module.parallax:last a.next-section.messe:last').remove();
+	    $(function () {
+	        $.scrollDepth();
+	        $('#btn-anmeldeunterlagen-de').on('click', function () {
+	            ga('send', 'event', 'button', 'click', 'btn-anmeldeunterlagen-de');
+	        });
+	        $('#btn_senden').on('click', function () {
+	            ga('send', 'event', 'button', 'click', 'btn-kontaktformular-de');
+	        });
+	        $('#form-datenschutz').on('click', function () {
+	            ga('send', 'event', 'button', 'click', 'btn-kontaktformular-datenschutz-de');
+	        });
+	
+	        $('#form-link-messe').on('click', function () {
+	            ga('send', 'event', 'button', 'click', 'btn-kontaktformular-link-messe-de');
+	        });
+	
+	        $('#footer1').on('click', function () {
+	            ga('send', 'event', 'button', 'click', 'btn-koelnmesse-vertretungen-de');
+	        });
+	
+	        $('#footer2').on('click', function () {
+	            ga('send', 'event', 'button', 'click', 'btn-impressum-de');
+	        });
+	        $('#footer3').on('click', function () {
+	            ga('send', 'event', 'button', 'click', 'btn-datenschutz-footer-de');
+	        });
+	        $('#footer4').on('click', function () {
+	            ga('send', 'event', 'button', 'click', 'btn-messe-veranstaltungen-de');
+	        });
+	        $('#footer5').on('click', function () {
+	            ga('send', 'event', 'button', 'click', 'btn-ansprechpartner-de');
+	        });
+	        $('#footer6').on('click', function () {
+	            ga('send', 'event', 'button', 'click', 'btn-logo-de');
+	        });
+	    });
+	</script> 
+    		
+    		
+
+
+    		
+  </body>
+
+
+</html>
